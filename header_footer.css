@@ -1,0 +1,429 @@
+/* Start Variables */
+:root {
+    --bg-color: #fff;
+    --text-color: #000;
+    --light-color: #ffffff;
+    --darker-color: #a7aaaf;
+    --main-color: #ff9f43;
+    --transition-all: all 0.4s;
+}
+/* End Variables */
+/* Start Global Rules */
+.dark {
+    --bg-color: #000;
+    --text-color: #fff;
+    --light-color: #41484e;
+    --darker-color: #1c1f22;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: "Open Sans", sans-serif;
+}
+.container {
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*? End Global Rules */
+
+/*! Start Header  */
+.header-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 0 20px;
+}
+.logo img {
+    width: 100px;
+}
+.header-top form {
+    display: flex;
+}
+.header-top form input[type="text"] {
+    border: 1px solid var(--text-color);
+    background: none;
+    padding: 20px ;
+    caret-color: var(--text-color);
+    outline: none;
+    width: 250px;
+    border-right: none;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.header-top form input[type="submit"] {
+    width: 100px;
+    background-color: var(--main-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border: 1px solid var(--text-color);
+    text-transform: uppercase;
+    border-left: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition: var(--transition-all);
+}
+@media (max-width: 900px) {
+    header .header-top  form {
+        display: none;
+    }
+}
+.magnifying-glass {
+    font-size: 25px;
+    margin-left: 10px;
+    display: none;
+}
+@media (max-width: 901px) {
+    .magnifying-glass {
+        display: block;
+    }
+}
+@media (max-width: 1000px) {
+    header .user {
+        display: none;
+    }
+}
+header .icon {
+    display: flex;
+    width: 250px;
+    justify-content: space-around;
+}
+header .icon i {
+    font-size: 35px;
+}
+.user,
+.shopping {
+    position: relative;
+}
+.user::before,
+.shopping::before,
+.shopping::after {
+    position: absolute;
+    font-size: 10px;
+    font-weight: bold;
+    left: 35px;
+}
+.user::before{
+    content: "My Account";
+    top: 0;
+    width: 80px;
+}
+.Login_Register {
+    font-size: 10px;
+    bottom: 0px;
+    color: var(--text-color);
+}
+.shopping::before{
+    content: "My cart";
+    top: 0;
+    width: 51px;
+}
+.shopping::after{
+    content: "(00.00LE)";
+    color: var(--main-color);
+    bottom: 0px;
+}
+
+/*! Start Nav */
+nav > ul {
+    width: 800px;
+    margin: 20px auto;
+    position: relative;
+}
+nav ul li {
+    display: inline-block;
+    padding: 10px 20px;
+}
+nav ul li a {
+    color: var(--text-color);
+}
+
+ /*! dropdown menu style */
+.fa-caret-down {
+    margin-left: 10px;
+}
+.dropdown-menu {
+    display: none;
+}
+
+ul li:focus-within .dropdown-menu {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 100%;
+    background-color: var(--darker-color);
+    border-radius: 6px;
+    z-index: 1;
+}
+ul li:focus-within .dropdown-menu ul li {
+    width: 160px;
+    display: block;
+}
+.dropdown-menu ul li a:hover {
+    color: var(--main-color);
+}
+/*! Start Burger */
+#menu {
+    display: none;
+    position: relative;
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    user-select: none;
+    margin: 30px auto;
+}
+#menu span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    background: var(--text-color);
+    border-radius: 6px;
+    transform-origin: 0 0;
+    transition: 0.4s;
+    margin-bottom: 5px; 
+}
+#menu.is-active span:nth-child(1) {
+    transform: translate(3px, 0px) rotate(45deg);
+}
+
+#menu.is-active span:nth-child(2) {
+    opacity: 0;
+}
+#menu.is-active span:nth-child(3) {
+    transform: translate(0px, 6px) rotate(-45deg);
+}
+#menu.is-active span {
+    background-color: red;
+}
+/*? End Burger */
+@media screen and (max-width: 768px) {
+    nav ul {
+        display: none;
+        position: relative;
+        top: 10px;
+        background-color: var(--darker-color); 
+        border-radius: 6px;
+    }
+    nav ul.is-active {
+        display: block;
+        width: auto;
+    }
+    nav ul li {
+        display: block;
+        margin: 0 ;
+        padding: 5px;
+    }
+    #menu {
+        display: block;
+    }
+    .bg-col {
+        display: none;
+    }
+    ul li:focus-within .dropdown-menu {
+        display: flex;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+    }
+    
+    .dropdown-menu ul {
+        width: 25%;
+        display: inline-block;
+    }
+}
+/*? End Nav */
+
+/*! Start */
+span.bg-col{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-image: linear-gradient(to right, var(--darker-color), var(--light-color));
+    z-index: -1;
+    transition: var(--transition-all);
+    border-radius: 20px;
+}
+header ul li:nth-child(1):hover~span.bg-col{
+    left: 0;
+    width: 80px;
+}
+header ul li:nth-child(2):hover~span.bg-col{
+    left: 95px;
+    width: 120px;
+}
+header ul li:nth-child(3):hover~span.bg-col{
+    left:246px;
+    width: 85px;
+}
+header ul li:nth-child(4):hover~span.bg-col{
+    left: 360px;
+    width: 95px;
+}
+header ul li:nth-child(5):hover~span.bg-col{
+    left: 475px;
+    width: 60px;
+}
+header ul li:nth-child(6):hover~span.bg-col {
+    left: 550px;
+    width: 120px;
+}
+header ul li:nth-child(7):hover~span.bg-col {
+    left: 695px;
+    width: 80px;
+}
+/*? End */
+/*? End Header  */
+
+
+
+
+.toggle {
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    width: 50px;
+    height: 25px;
+    border-radius: 50px;
+    border: 0.1px solid var(--light-color);
+    background-color: var(--bg-color);
+    box-shadow: inset 10px 10px 15px var(--darker-color),
+    inset -10px -10px 15px var(--light-color);
+}
+.toggle label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+.toggle-icon {
+    width: 15px;
+    height: 15px;
+    margin: 5px 0;
+    display: inline-block;
+    border-radius: 100px;
+    transition: var(--transition-all);
+    box-shadow: 
+    0px 0px 0px 3px var(--bg-color),
+    4px 4px 7px var(--darker-color),
+    -4px -4px 7px var(--light-color);
+}
+.toggle input {
+    width: 70px;
+    height: 45px;
+    opacity: 0;
+    cursor: pointer;
+}
+.toggle input:checked + label .toggle-icon {
+    transform: translateX(30px) rotate(360deg);
+}
+/*? End Dark mode button */
+/*!  */
+#arrowup {
+    cursor: pointer;
+    background-color: var(--main-color);
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+    font-size: 30px;
+    display: none;
+    font-weight: 400;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 50%;
+}
+/*? */
+
+
+/*! Start Brand  */
+.brand {
+    display: flex;
+    padding: 0 35px;
+    align-items: center;
+    justify-content: center;
+  }
+  .wrapper{
+    display: flex;
+    max-width: 1200px;
+    position: relative;
+  }
+  .wrapper i{
+    top: 50%;
+    height: 44px;
+    width: 44px;
+    color: #343F4F;
+    cursor: pointer;
+    font-size: 1.15rem;
+    position: absolute;
+    text-align: center;
+    line-height: 44px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.1s linear;
+  }
+  .wrapper i:active{
+    transform: translateY(-50%) scale(0.9);
+  }
+  .wrapper i:hover{
+    background: #f2f2f2;
+  }
+  .wrapper i:first-child{
+    left: -22px;
+    display: none;
+  }
+  .wrapper i:last-child{
+    right: -22px;
+  }
+  .wrapper .carousel{
+    font-size: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+  }
+  .carousel.dragging{
+    cursor: grab;
+    scroll-behavior: auto;
+  }
+  .carousel.dragging img{
+    pointer-events: none;
+  }
+  .carousel img{
+    height: 200px;
+    object-fit: cover;
+    user-select: none;
+    margin-left: 14px;
+    width: calc(100% / 4);
+  }
+  .carousel img:first-child{
+    margin-left: 0px;
+  }
+  
+  @media screen and (max-width: 900px) {
+    .carousel img{
+      width: calc(100% / 2);
+    }
+  }
+  
+  @media screen and (max-width: 550px) {
+    .carousel img{
+      width: 100%;
+    }
+  }
+/*? End Brand  */
+.r-home {
+    color: #18b7ff;
+}

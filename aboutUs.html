@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about us</title>
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="./css/aboutUs.css">
+    <link rel="stylesheet" href="./header_footer.css">
+    <script src="./js/header.js"></script>
+</head>
+<body>
+    <div class="about container">
+            <a href="./index.html" class="r-home"><i class="fa-solid fa-house-chimney"></i></a> <i class="fa-solid fa-greater-than"></i> <span class="tt">ABOUT US</span>
+            <h1>WELCOME TO EPIC HARDWARE</h1>
+            <div class="choose">
+              <h3>Why Choose Us</h3>
+            <h5><i class="fa-solid fa-check"></i> Shipping & Returns</h5>
+            <h5><i class="fa-solid fa-check"></i> Secure Shopping</h5>
+            <h5><i class="fa-solid fa-check"></i> ONLINE SUPPORT</h5>
+            <h5><i class="fa-solid fa-check"></i> ORDER PROTECTION</h5>
+            <h5><i class="fa-solid fa-check"></i> PROMOTION GIFT</h5>
+                
+            </div>
+            <p>
+              We are <b>EPIC HARDWARE</b>, the leader in the Egyptian electronics market, providing specialized solutions in the field of retail and wholesale electronics, including laptops, computers and accessories.
+              We are an agent for XFX and LOGITECH, and we provide a comprehensive range of computer accessories, laptops and cables, to fully meet the needs of the Egyptian market.
+              Our team is trained and ready to answer all your questions and help you make the best decision. 
+              At <b>EPIC HARDWARE</b> Computer, we pride ourselves on providing quality products and excellent services to our customers, always striving to achieve their complete satisfaction.
+              Why Choose Us
+              Shipping & Returns
+              Secure Shopping
+              ONLINE SUPPORT
+              ORDER PROTECTION
+              PROMOTION GIFT
+                </p>
+          <div class="information">
+            was founded in 2024 in Egypt and since then, it has grown and expanded to become one of the most prominent companies in the field
+            <br>
+            Company Address: Beni Suef Al-Abaseri <br> Phone number: 123-456-789
+            <br>
+            landline: 082-377-123
+            <br>
+              Sunday to Thursday from 10 am to 7 pm
+          </div>
+    </div>
+    <script src="./js/brand_footer.js"></script>
+    <script>
+const carousel = document.querySelector(".carousel"),
+firstImg = carousel.querySelectorAll("img")[0],
+arrowIcons = document.querySelectorAll(".wrapper i");
+
+let isDragStart = false, isDragging = false, prevPageX, prevScrollLeft, positionDiff;
+
+const showHideIcons = () => {
+    // showing and hiding prev/next icon according to carousel scroll left value
+    let scrollWidth = carousel.scrollWidth - carousel.clientWidth; // getting max scrollable width
+    arrowIcons[0].style.display = carousel.scrollLeft == 0 ? "none" : "block";
+    arrowIcons[1].style.display = carousel.scrollLeft == scrollWidth ? "none" : "block";
+}
+
+arrowIcons.forEach(icon => {
+    icon.addEventListener("click", () => {
+        let firstImgWidth = firstImg.clientWidth + 14; // getting first img width & adding 14 margin value
+        // if clicked icon is left, reduce width value from the carousel scroll left else add to it
+        carousel.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+        setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+    });
+});
+
+const autoSlide = () => {
+    // if there is no image left to scroll then return from here
+    if(carousel.scrollLeft - (carousel.scrollWidth - carousel.clientWidth) > -1 || carousel.scrollLeft <= 0) return;
+
+    positionDiff = Math.abs(positionDiff); // making positionDiff value to positive
+    let firstImgWidth = firstImg.clientWidth + 14;
+    // getting difference value that needs to add or reduce from carousel left to take middle img center
+    let valDifference = firstImgWidth - positionDiff;
+
+    if(carousel.scrollLeft > prevScrollLeft) { // if user is scrolling to the right
+        return carousel.scrollLeft += positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+    }
+    // if user is scrolling to the left
+    carousel.scrollLeft -= positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+}
+
+const dragStart = (e) => {
+    // updatating global variables value on mouse down event
+    isDragStart = true;
+    prevPageX = e.pageX || e.touches[0].pageX;
+    prevScrollLeft = carousel.scrollLeft;
+}
+
+const dragging = (e) => {
+    // scrolling images/carousel to left according to mouse pointer
+    if(!isDragStart) return;
+    e.preventDefault();
+    isDragging = true;
+    carousel.classList.add("dragging");
+    positionDiff = (e.pageX || e.touches[0].pageX) - prevPageX;
+    carousel.scrollLeft = prevScrollLeft - positionDiff;
+    showHideIcons();
+}
+
+const dragStop = () => {
+    isDragStart = false;
+    carousel.classList.remove("dragging");
+    if(!isDragging) return;
+    isDragging = false;
+    autoSlide();
+}
+
+carousel.addEventListener("mousedown", dragStart);
+carousel.addEventListener("touchstart", dragStart);
+
+document.addEventListener("mousemove", dragging);
+carousel.addEventListener("touchmove", dragging);
+
+document.addEventListener("mouseup", dragStop);
+carousel.addEventListener("touchend", dragStop);
+    </script>
+</body>
+</html>

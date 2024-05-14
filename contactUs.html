@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact us</title>
+    <link rel="stylesheet" href="./css/contactUs.css">
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="./header_footer.css">
+    <script src="./js/header.js"></script>
+</head>
+<body style="background-color: #ddd;">
+    <div class="contactus">
+        <a href="./index.html" class="r-home"><i class="fa-solid fa-house-chimney"></i></a> <i class="fa-solid fa-greater-than"></i> <span>ABOUT US</span>
+        <div class="title">
+            <h2>contact us</h2>
+        </div>
+        <div class="box">
+            <!--form-->
+            <div class="contact form">
+                <h3>Send aMessage</h3>
+                <form>
+                    <div class="formBox">
+                        <div class="row50">
+                            <div class="inputBox">
+                                <span>First Name</span>
+                                <input type="text" placeholder="name">
+                            </div>
+                            <div class="inputBox">
+                                <span>Last Name</span>
+                                <input type="text" placeholder="name">
+                            </div>
+                        </div>
+
+                        <div class="row50">
+                            <div class="inputBox">
+                                <span>Email</span>
+                                <input type="text" placeholder="www@email.com">
+                            </div>
+                            <div class="inputBox">
+                                <span>Mobile</span>
+                                <input type="text" placeholder="+20 123 355 9887">
+                            </div>
+                        </div>
+
+                        <div class="inputBox">
+                            <span>Message</span>
+                            <textarea placeholder="Write your Message here...."></textarea>
+                        </div>
+
+                        <div class="inputBox">
+                            <input type="submit" value="Send">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--info box-->
+            <div class="contact info">
+                <h3>Contact Info</h3>
+                <div class="infoBox">
+                    <div>
+                        <span><i class="fa-solid fa-location-dot"></i></span>
+                        <p>Egypt <br>Bani Sweif</p>
+                    </div>
+                    <div>
+                        <span><i class="fa-solid fa-envelope"></i></span>
+                        <a href="mailto:Loremipsum@email.com">Loremipsum@email.com </a>
+                    </div>
+                    <div>
+                        <span><i class="fa-solid fa-phone"></i></span>
+                        <a href="tel:+201233559887">+20 123 355 9887 </a>
+                    </div>
+                    <!--social media links-->
+                    <div class="sci">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-linkedin"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+            <!--map -->
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7292353.383211466!2d36.17544176678409!3d26.81706107301444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14368976c35c36e9%3A0x2c45a00925c4c444!2z2YXYtdix!5e0!3m2!1sar!2seg!4v1715191694728!5m2!1sar!2seg" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="./js/brand_footer.js"></script>
+    <script>
+        const carousel = document.querySelector(".carousel"),
+        firstImg = carousel.querySelectorAll("img")[0],
+        arrowIcons = document.querySelectorAll(".wrapper i");
+        
+        let isDragStart = false, isDragging = false, prevPageX, prevScrollLeft, positionDiff;
+        
+        const showHideIcons = () => {
+            // showing and hiding prev/next icon according to carousel scroll left value
+            let scrollWidth = carousel.scrollWidth - carousel.clientWidth; // getting max scrollable width
+            arrowIcons[0].style.display = carousel.scrollLeft == 0 ? "none" : "block";
+            arrowIcons[1].style.display = carousel.scrollLeft == scrollWidth ? "none" : "block";
+        }
+        
+        arrowIcons.forEach(icon => {
+            icon.addEventListener("click", () => {
+                let firstImgWidth = firstImg.clientWidth + 14; // getting first img width & adding 14 margin value
+                // if clicked icon is left, reduce width value from the carousel scroll left else add to it
+                carousel.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+                setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+            });
+        });
+        
+        const autoSlide = () => {
+            // if there is no image left to scroll then return from here
+            if(carousel.scrollLeft - (carousel.scrollWidth - carousel.clientWidth) > -1 || carousel.scrollLeft <= 0) return;
+        
+            positionDiff = Math.abs(positionDiff); // making positionDiff value to positive
+            let firstImgWidth = firstImg.clientWidth + 14;
+            // getting difference value that needs to add or reduce from carousel left to take middle img center
+            let valDifference = firstImgWidth - positionDiff;
+        
+            if(carousel.scrollLeft > prevScrollLeft) { // if user is scrolling to the right
+                return carousel.scrollLeft += positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+            }
+            // if user is scrolling to the left
+            carousel.scrollLeft -= positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+        }
+        
+        const dragStart = (e) => {
+            // updatating global variables value on mouse down event
+            isDragStart = true;
+            prevPageX = e.pageX || e.touches[0].pageX;
+            prevScrollLeft = carousel.scrollLeft;
+        }
+        
+        const dragging = (e) => {
+            // scrolling images/carousel to left according to mouse pointer
+            if(!isDragStart) return;
+            e.preventDefault();
+            isDragging = true;
+            carousel.classList.add("dragging");
+            positionDiff = (e.pageX || e.touches[0].pageX) - prevPageX;
+            carousel.scrollLeft = prevScrollLeft - positionDiff;
+            showHideIcons();
+        }
+        
+        const dragStop = () => {
+            isDragStart = false;
+            carousel.classList.remove("dragging");
+            if(!isDragging) return;
+            isDragging = false;
+            autoSlide();
+        }
+        
+        carousel.addEventListener("mousedown", dragStart);
+        carousel.addEventListener("touchstart", dragStart);
+        
+        document.addEventListener("mousemove", dragging);
+        carousel.addEventListener("touchmove", dragging);
+        
+        document.addEventListener("mouseup", dragStop);
+        carousel.addEventListener("touchend", dragStop);
+    </script>
+</body>
+</html>
